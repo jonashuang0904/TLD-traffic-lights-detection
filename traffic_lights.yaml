@@ -2,9 +2,9 @@
 # ATLAS Dataset - 25 Traffic Light Classes - Auto-generated
 
 # Dataset paths
-path: /lhome/zikhuan/ml2/src/data/demo/demo_output
-train: images/train
-val: images/val
+path: src/data/raw/student_dataset/train_color
+train: images
+val: images
 
 # Number of classes
 nc: 25
@@ -43,13 +43,14 @@ names:
 # Train/Val Split: 0.8/0.2
 
 # Training hyperparameters optimized for traffic light detection
-hsv_h: 0.015        # HSV-Hue augmentation (conservative for small objects)
-hsv_s: 0.7          # HSV-Saturation augmentation  
-hsv_v: 0.4          # HSV-Value augmentation
-degrees: 10         # Image rotation (+/- deg)
-translate: 0.1      # Image translation (+/- fraction)
-scale: 0.5          # Image scale (+/- gain)
+hsv_h: 0.02         # HSV-Hue augmentation (conservative for small objects)
+hsv_s: 0.8          # HSV-Saturation augmentation  
+hsv_v: 0.6          # HSV-Value augmentation
+degrees: 15         # Image rotation (+/- deg)
+translate: 0.15     # Image translation (+/- fraction)
+scale: 0.7          # Image scale (+/- gain)
 fliplr: 0.5         # Image flip left-right (probability)
 flipud: 0.0         # Image flip up-down (disabled for traffic lights)
 mosaic: 1.0         # Image mosaic (probability)
-mixup: 0.1          # Image mixup (probability) - light mixing
+mixup: 0.2          # Image mixup (probability) - light mixing
+copy_paste: 0.1     # Copy-paste augmentation (disabled for traffic lights)

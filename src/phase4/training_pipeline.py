@@ -32,7 +32,7 @@ class TrafficLightTrainer:
     
     def __init__(self, config_path: str = "traffic_lights.yaml", 
                  experiment_name: str = None,
-                 model_size: str = "yolo11n"):
+                 model_size: str = "yolo11m"):
         """
         Initialize the training pipeline
         
@@ -118,19 +118,19 @@ class TrafficLightTrainer:
         # Base configuration optimized for small object detection (traffic lights)
         config = {
             # Training parameters
-            'epochs': 300,              # Extended training for better convergence
-            'patience': 50,             # Early stopping patience
-            'batch': 16,                # Batch size (adjust based on GPU memory)
+            'epochs': 200,              # Extended training for better convergence
+            'patience': 30,             # Early stopping patience
+            'batch': 32,                # Batch size (adjust based on GPU memory)
             'imgsz': 640,              # Image size (standard YOLO)
             
             # Optimization
-            'lr0': 0.01,               # Initial learning rate
-            'lrf': 0.01,               # Final learning rate fraction
-            'momentum': 0.937,         # SGD momentum
-            'weight_decay': 0.0005,    # Optimizer weight decay
-            'warmup_epochs': 3.0,      # Warmup epochs
-            'warmup_momentum': 0.8,    # Warmup initial momentum
-            'warmup_bias_lr': 0.1,     # Warmup initial bias lr
+            'lr0': 0.005,               # Initial learning rate
+            'lrf': 0.001,               # Final learning rate fraction
+            'momentum': 0.9,         # SGD momentum
+            'weight_decay': 0.001,    # Optimizer weight decay
+            'warmup_epochs': 5.0,      # Warmup epochs
+            'warmup_momentum': 0.5,    # Warmup initial momentum
+            'warmup_bias_lr': 0.05,     # Warmup initial bias lr
             
             # Data augmentation (traffic light optimized)
             'hsv_h': 0.015,            # HSV-Hue augmentation (conservative)
@@ -148,9 +148,9 @@ class TrafficLightTrainer:
             'copy_paste': 0.0,         # Segment copy-paste (disabled)
             
             # Loss function weights
-            'box': 7.5,                # Box loss gain
-            'cls': 0.5,                # Class loss gain
-            'dfl': 1.5,                # Distribution focal loss gain
+            'box': 10,                # Box loss gain
+            'cls': 1.0,                # Class loss gain
+            'dfl': 2.0,                # Distribution focal loss gain
             
             # Validation and saving
             'save_period': 10,         # Save checkpoint every N epochs  
@@ -161,9 +161,9 @@ class TrafficLightTrainer:
             # Advanced options
             'overlap_mask': True,      # Use overlap mask for training
             'mask_ratio': 4,           # Mask downsample ratio
-            'dropout': 0.0,            # Use dropout regularization
-            'cos_lr': False,           # Use cosine LR scheduler
-            'close_mosaic': 10,        # Disable mosaic augmentation for final epochs
+            'dropout': 0.2,            # Use dropout regularization
+            'cos_lr': True,           # Use cosine LR scheduler
+            'close_mosaic': 20,        # Disable mosaic augmentation for final epochs
             
             # Model configuration
             'pretrained': True,        # Use pretrained weights
@@ -173,18 +173,10 @@ class TrafficLightTrainer:
             'single_cls': False,       # Train as single-class dataset
             'rect': False,             # Rectangular training
             'resume': False,           # Resume training from last checkpoint
-            'nosave': False,           # Only save final checkpoint
-            'noval': False,            # Only validate final epoch
-            'noautoanchor': False,     # Disable AutoAnchor
-            'noplots': False,          # Disable plotting
-            'evolve': None,            # Evolve hyperparameters for N generations
-            'bucket': '',              # Google Cloud Storage bucket
             'cache': False,            # Cache images for faster training
-            'image_weights': False,    # Use weighted image selection for training
             'device': str(self.device), # Training device
             'multi_scale': False,      # Vary img-size +/- 50%
-            'optimizer': 'SGD',        # Optimizer (Adam, AdamW, NAdam, RAdam, RMSProp, SGD)
-            'sync_bn': False,          # Use SyncBatchNorm
+            'optimizer': 'AdamW',        # Optimizer (Adam, AdamW, NAdam, RAdam, RMSProp, SGD)
             'workers': 8,              # Max dataloader workers
             'project': str(self.experiment_dir.parent),  # Project directory
             'name': self.experiment_name,                # Experiment name
