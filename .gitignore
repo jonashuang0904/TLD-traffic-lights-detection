@@ -1,0 +1,8 @@
+__pycache__
+archive/
+experiments/
+demo_evaluation/
+src/data/demo/
+src/data/processed/
+src/data/raw/
+src/models/pretrained/

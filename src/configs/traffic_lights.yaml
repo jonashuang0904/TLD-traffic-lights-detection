@@ -1,0 +1,55 @@
+# Traffic Light Detection Dataset Configuration
+# ATLAS Dataset - 25 Traffic Light Classes - Auto-generated
+
+# Dataset paths
+path: /lhome/zikhuan/ml2/src/data/demo/demo_output
+train: images/train
+val: images/val
+
+# Number of classes
+nc: 25
+
+# Class names (exactly as specified in assignment)
+names:
+  0: circle_green
+  1: circle_red
+  2: off
+  3: circle_red_yellow
+  4: arrow_left_green
+  5: circle_yellow
+  6: arrow_right_red
+  7: arrow_left_red
+  8: arrow_straight_red
+  9: arrow_left_red_yellow
+  10: arrow_left_yellow
+  11: arrow_straight_yellow
+  12: arrow_right_red_yellow
+  13: arrow_right_green
+  14: arrow_right_yellow
+  15: arrow_straight_green
+  16: arrow_straight_left_green
+  17: arrow_straight_red_yellow
+  18: arrow_straight_left_red
+  19: arrow_straight_left_yellow
+  20: arrow_straight_left_red_yellow
+  21: arrow_straight_right_red
+  22: arrow_straight_right_red_yellow
+  23: arrow_straight_right_yellow
+  24: arrow_straight_right_green
+
+# Dataset Statistics (Auto-generated)
+# Total Images: 5
+# Total Annotations: 10
+# Train/Val Split: 0.8/0.2
+
+# Training hyperparameters optimized for traffic light detection
+hsv_h: 0.015        # HSV-Hue augmentation (conservative for small objects)
+hsv_s: 0.7          # HSV-Saturation augmentation  
+hsv_v: 0.4          # HSV-Value augmentation
+degrees: 10         # Image rotation (+/- deg)
+translate: 0.1      # Image translation (+/- fraction)
+scale: 0.5          # Image scale (+/- gain)
+fliplr: 0.5         # Image flip left-right (probability)
+flipud: 0.0         # Image flip up-down (disabled for traffic lights)
+mosaic: 1.0         # Image mosaic (probability)
+mixup: 0.1          # Image mixup (probability) - light mixing
